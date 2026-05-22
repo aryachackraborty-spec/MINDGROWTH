@@ -243,8 +243,8 @@ export default function TestimonialsPage() {
                 <div className="relative py-2 select-none overflow-hidden">
                   <div className="animate-marquee-left flex gap-6 hover:[animation-play-state:paused] cursor-grab active:cursor-grabbing">
                     {(() => {
-                      const mid = Math.ceil(reviews.length / 2);
-                      const t1 = reviews.slice(0, mid);
+                      const sliceCount = Math.ceil(reviews.length / 3);
+                      const t1 = reviews.slice(0, sliceCount);
                       // Duplicate list enough times to exceed viewport window seamlessly
                       let repeated = [...t1];
                       while (repeated.length < 8) {
@@ -263,8 +263,8 @@ export default function TestimonialsPage() {
                 <div className="relative py-2 select-none overflow-hidden">
                   <div className="animate-marquee-right flex gap-6 hover:[animation-play-state:paused] cursor-grab active:cursor-grabbing">
                     {(() => {
-                      const mid = Math.ceil(reviews.length / 2);
-                      const t2 = reviews.slice(mid);
+                      const sliceCount = Math.ceil(reviews.length / 3);
+                      const t2 = reviews.slice(sliceCount, sliceCount * 2);
                       let repeated = [...t2];
                       while (repeated.length < 8) {
                         repeated = [...repeated, ...t2];
@@ -278,128 +278,33 @@ export default function TestimonialsPage() {
                   </div>
                 </div>
 
+                {/* Track 3: Row Scrolling Left (Third layer of reviews!) */}
+                <div className="relative py-2 select-none overflow-hidden">
+                  <div className="animate-marquee-left flex gap-6 hover:[animation-play-state:paused] cursor-grab active:cursor-grabbing">
+                    {(() => {
+                      const sliceCount = Math.ceil(reviews.length / 3);
+                      const t3 = reviews.slice(sliceCount * 2);
+                      let repeated = [...t3];
+                      while (repeated.length < 8) {
+                        repeated = [...repeated, ...t3];
+                      }
+                      return repeated.map((rev, idx) => (
+                        <div key={`t3-item-${rev.id}-${idx}`} className="w-[300px] sm:w-[360px] shrink-0">
+                          <TestimonialCard rev={rev} />
+                        </div>
+                      ));
+                    })()}
+                  </div>
+                </div>
+
                 <div className="text-center pt-2">
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-slate-500 bg-slate-900/40 px-3 py-1.5 rounded-full border border-slate-900/50">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 bg-slate-900/40 px-3 py-1.5 rounded-full border border-slate-900/50">
                     💡 Hover card surface to freeze continuous automated slide loop
                   </span>
                 </div>
               </div>
             )}
           </AnimatePresence>
-        </div>
-
-        {/* Dynamic Interactive Element: Review Draft Area */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center bg-slate-900/40 p-8 md:p-12 rounded-3xl border border-slate-800">
-          <div className="lg:col-span-6">
-            <span className="text-[10px] font-mono uppercase tracking-widest text-cyan-400 block mb-2">Live Dynamic System</span>
-            <h2 className="text-2xl md:text-3.5xl font-black uppercase text-white mb-4">
-              DRAFT YOUR REVIEW INSTANTLY
-            </h2>
-            <p className="text-xs md:text-sm text-slate-400 font-sans leading-relaxed mb-6">
-              Are you a MindGrowth Academy student or parent? Fill this conceptual reviewer sandbox module 
-              to see your review appear live in the scrolling queue block above! Our dynamic system simulates the feedback array instantly.
-            </p>
-
-            <div className="flex gap-4 items-center mb-6">
-              <div className="p-3 bg-slate-950 border border-slate-800 rounded-xl">
-                <PlusCircle className="w-6 h-6 text-cyan-400" />
-              </div>
-              <div>
-                <h4 className="text-xs font-bold text-white uppercase">Client State Injection</h4>
-                <p className="text-[10px] text-slate-505 font-mono">Simulates real database writes directly inside the browser memory context (localStorage ready).</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="lg:col-span-6">
-            <form onSubmit={handleSubmitReview} className="space-y-4">
-              {successMsg && (
-                <div className="p-3 text-xs bg-emerald-950 text-emerald-300 border border-emerald-500/20 rounded-xl font-sans uppercase text-center animate-pulse">
-                  ✓ Review successfully compiled & injected to local state queue!
-                </div>
-              )}
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-[9px] font-mono uppercase tracking-wider text-slate-400 block mb-1">Student Full Name *</label>
-                  <input
-                    type="text"
-                    required
-                    value={newName}
-                    onChange={(e) => setNewName(e.target.value)}
-                    placeholder="e.g. Priyanjali Sen"
-                    className="w-full bg-slate-950/80 border border-slate-800 focus:border-cyan-500 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-[9px] font-mono uppercase tracking-wider text-slate-400 block mb-1">Parent Name *(Optional)</label>
-                  <input
-                    type="text"
-                    value={newParentName}
-                    onChange={(e) => setNewParentName(e.target.value)}
-                    placeholder="e.g. Debasish Sen"
-                    className="w-full bg-slate-950/80 border border-slate-800 focus:border-cyan-500 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-[9px] font-mono uppercase tracking-wider text-slate-400 block mb-1">Curriculum Class / Ranker Status</label>
-                  <input
-                    type="text"
-                    value={newClass}
-                    onChange={(e) => setNewClass(e.target.value)}
-                    placeholder="e.g. Class XII CBSE"
-                    className="w-full bg-slate-950/80 border border-slate-800 focus:border-cyan-500 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-[9px] font-mono uppercase tracking-wider text-slate-400 block mb-1">Select Star Rating</label>
-                  <select
-                    value={newRating}
-                    onChange={(e) => setNewRating(parseInt(e.target.value))}
-                    className="w-full bg-slate-950 border border-slate-800 focus:border-cyan-500 rounded-xl px-4 py-2.5 text-xs text-slate-300 focus:outline-none"
-                  >
-                    <option value={5}>⭐⭐⭐⭐⭐ (5 Stars)</option>
-                    <option value={4}>⭐⭐⭐⭐ (4 Stars)</option>
-                  </select>
-                </div>
-              </div>
-
-              <div>
-                <label className="text-[9px] font-mono uppercase tracking-wider text-slate-400 block mb-1">English Review Text *</label>
-                <textarea
-                  required
-                  rows={2}
-                  value={newTextEn}
-                  onChange={(e) => setNewTextEn(e.target.value)}
-                  placeholder="How did MindGrowth improve your mock scores, confidence, or concepts?"
-                  className="w-full bg-slate-950/80 border border-slate-800 focus:border-cyan-500 rounded-xl p-4 text-xs text-white focus:outline-none font-sans"
-                />
-              </div>
-
-              <div>
-                <label className="text-[9px] font-mono uppercase tracking-wider text-slate-400 block mb-1">Bengali support review (Optional)</label>
-                <textarea
-                  rows={2}
-                  value={newTextBn}
-                  onChange={(e) => setNewTextBn(e.target.value)}
-                  placeholder="আমার ছেলের confidence অনেক improve করেছে..."
-                  className="w-full bg-slate-950/80 border border-slate-800 focus:border-cyan-500 rounded-xl p-4 text-xs text-white focus:outline-none font-sans"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full py-3 bg-gradient-to-r from-cyan-400 to-teal-400 hover:opacity-90 text-slate-950 text-xs font-bold tracking-wider rounded-xl uppercase hover:shadow-[0_0_15px_rgba(0,240,255,0.25)] duration-200 cursor-pointer"
-              >
-                🚀 Inject Simulated Review Live
-              </button>
-            </form>
-          </div>
         </div>
 
       </div>

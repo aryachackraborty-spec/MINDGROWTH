@@ -36,9 +36,11 @@ interface Particle {
 
 interface CourseCardProps {
   course: Course;
+  isSelectedForCompare?: boolean;
+  onToggleCompare?: () => void;
 }
 
-export default function CourseCard({ course }: CourseCardProps) {
+export default function CourseCard({ course, isSelectedForCompare = false, onToggleCompare }: CourseCardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
   const [particles, setParticles] = useState<Particle[]>([]);
   
@@ -131,7 +133,7 @@ export default function CourseCard({ course }: CourseCardProps) {
       ref={cardOuterRef}
       onMouseMove={handleMouseMove}
       onMouseEnter={playHoverTick}
-      className="perspective-1000 w-full relative h-[670px] select-none cursor-default group"
+      className="perspective-1000 w-full relative h-[740px] xs:h-[710px] sm:h-[685px] md:h-[670px] select-none cursor-default group"
     >
       {/* Dynamic Framer Motion trail particles */}
       <div className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none z-30">
@@ -179,7 +181,7 @@ export default function CourseCard({ course }: CourseCardProps) {
           {/* Glowing neon top-bar */}
           <div className={`h-1.5 w-full bg-gradient-to-r ${course.glowColor}`} />
 
-          <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
+          <div className="p-5 xs:p-6 md:p-8 flex-1 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-4">
                 {/* Course Icon container */}
@@ -187,30 +189,49 @@ export default function CourseCard({ course }: CourseCardProps) {
                   {getCourseIcon(course.iconName)}
                 </div>
                 
-                <span className="text-[10px] font-mono font-bold text-slate-400 bg-slate-950 border border-slate-900 px-2.5 py-1 rounded-full uppercase tracking-widest">
-                  {course.boardText}
-                </span>
+                <div className="flex items-center gap-2">
+                  {onToggleCompare && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onToggleCompare();
+                      }}
+                      className={`px-2.5 py-1 text-[9px] font-mono font-black rounded-full uppercase tracking-wider flex items-center gap-1 cursor-pointer transition-all border duration-200 z-40 ${
+                        isSelectedForCompare
+                          ? "bg-cyan-500 text-slate-950 border-cyan-400 font-extrabold shadow-[0_0_10px_rgba(0,255,255,0.45)]"
+                          : "bg-slate-950 text-slate-400 border-slate-800 hover:text-white hover:border-cyan-500/40"
+                      }`}
+                      title={isSelectedForCompare ? "Click to remove from compare queue" : "Select to compare with another course"}
+                    >
+                      <span>{isSelectedForCompare ? "✓ COMPARING" : "+ COMPARE"}</span>
+                    </button>
+                  )}
+                  
+                  <span className="text-[10px] font-mono font-bold text-slate-400 bg-slate-950 border border-slate-900 px-2.5 py-1 rounded-full uppercase tracking-widest">
+                    {course.boardText}
+                  </span>
+                </div>
               </div>
 
               <h3 className="text-xl md:text-2xl font-black text-white group-hover:text-cyan-300 transition-colors uppercase tracking-tight">
                 {course.title}
               </h3>
               
-              <p className="text-xs font-semibold text-cyan-400/90 mt-1 mb-4 font-mono">
+              <p className="text-xs font-semibold text-cyan-400/90 mt-1 mb-3 font-mono">
                 {course.tagline}
               </p>
               
-              <p className="text-xs text-slate-400 font-sans leading-relaxed mb-4 min-h-[50px]">
+              <p className="text-xs text-slate-400 font-sans leading-relaxed mb-3 min-h-0 xs:min-h-[50px]">
                 {course.description}
               </p>
 
               {/* Interactive 3D Model Visualizer Component */}
-              <div className="mb-6 relative z-20">
+              <div className="mb-3 sm:mb-6 relative z-20">
                 <Interactive3DModel courseId={course.id} />
               </div>
 
               {/* Strategic Advantages (Front Overview Preview) */}
-              <div className="space-y-2 mb-6">
+              <div className="space-y-2 mb-3 sm:mb-6">
                 <span className="text-[10px] font-mono uppercase tracking-widest text-slate-500 block">Core Advantages</span>
                 {course.features.slice(0, 3).map((feat) => (
                   <div key={feat} className="flex gap-2 items-start text-xs text-slate-300 font-sans">
@@ -222,7 +243,7 @@ export default function CourseCard({ course }: CourseCardProps) {
             </div>
 
             {/* Controls Button - Triggers 3D Flip */}
-            <div className="flex gap-3 pt-4 border-t border-slate-900/40 mt-auto">
+            <div className="flex gap-3 pt-3 sm:pt-4 border-t border-slate-900/40 mt-auto">
               <button
                 onClick={handleToggleFlip}
                 className="flex-1 py-3 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-xs font-black uppercase tracking-wider text-slate-200 flex items-center justify-center gap-1.5 cursor-pointer transition-colors hover:text-cyan-400"

@@ -482,7 +482,7 @@ export default function Interactive3DModel({ courseId, glowColorClass = "from-cy
   return (
     <div 
       ref={containerRef}
-      className="relative w-full h-[190px] rounded-xl bg-slate-950/60 border border-slate-900 border-dashed overflow-hidden flex flex-col justify-center items-center group/model mt-3 select-none transition-all duration-300 hover:scale-[1.03] hover:border-cyan-500/40 hover:shadow-[0_0_20px_rgba(6,182,212,0.1)]"
+      className="relative w-full h-[155px] sm:h-[190px] rounded-xl bg-slate-950/60 border border-slate-900 border-dashed overflow-hidden flex flex-col justify-center items-center group/model mt-3 select-none transition-all duration-300 hover:scale-[1.03] hover:border-cyan-500/40 hover:shadow-[0_0_20px_rgba(6,182,212,0.1)]"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => {
         setIsHovered(false);

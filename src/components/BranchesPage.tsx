@@ -220,26 +220,119 @@ export default function BranchesPage() {
           </motion.div>
 
           {/* Map display panel (Iframe) */}
-          <div className="lg:col-span-7 rounded-2xl glass-card overflow-hidden h-96 lg:h-auto border border-slate-800 min-h-[380px] relative">
+          <div className="lg:col-span-7 rounded-2xl glass-card overflow-hidden h-[440px] lg:h-auto border border-slate-800 min-h-[440px] relative transition-all duration-305">
+            {/* 🛰️ Premium Interactive Node Radar HUD Overlay */}
+            <div className="absolute top-4 left-4 right-4 z-20 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 bg-slate-950/85 backdrop-blur-md rounded-xl border border-slate-800/85 p-3.5 shadow-[0_10px_40px_rgba(0,0,0,0.65)]">
+              <div>
+                <div className="flex items-center gap-1.5 text-cyan-400 font-mono text-[9px] uppercase tracking-widest font-black">
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                  <span>Interactive Network Radar</span>
+                </div>
+                <h3 className="text-xs font-black uppercase text-white tracking-wide mt-0.5">Campus Selection Nodes</h3>
+              </div>
+              <div className="flex flex-wrap items-center gap-2">
+                {[
+                  { slug: "naktala", label: "Naktala Core", coords: "22.48° N, 88.36° E", color: "from-cyan-500 to-blue-500" },
+                  { slug: "sonarpur", label: "Sonarpur Hub", coords: "22.44° N, 88.42° E", color: "from-purple-500 to-fuchsia-600" },
+                  { slug: "canning", label: "Canning Base", coords: "22.31° N, 88.66° E", color: "from-emerald-500 to-teal-500" }
+                ].map((item) => {
+                  const isNodeActive = activeBranchSlug === item.slug;
+                  return (
+                    <button
+                      key={item.slug}
+                      onClick={() => setActiveBranchSlug(item.slug)}
+                      className={`relative px-3 py-2 rounded-lg border text-[10px] font-mono uppercase tracking-wider transition-all duration-355 flex items-center gap-2 cursor-pointer ${
+                        isNodeActive
+                          ? "bg-slate-900 border-cyan-500/50 text-white shadow-[0_0_15px_rgba(34,211,238,0.25)] scale-105 animate-pulse"
+                          : "bg-slate-950/60 border-slate-850 text-slate-400 hover:text-slate-200 hover:border-slate-700 hover:scale-[1.02]"
+                      }`}
+                    >
+                      {/* Dual-concentric radar pulsing effect */}
+                      <span className="relative flex h-2.5 w-2.5 items-center justify-center">
+                        {isNodeActive && (
+                          <>
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400/60 opacity-80" />
+                            <span className="animate-pulse absolute inline-flex h-4 w-4 rounded-full bg-cyan-500/20" />
+                          </>
+                        )}
+                        <span className={`relative inline-flex rounded-full h-2 w-2 bg-gradient-to-tr ${item.color} shadow-lg`} />
+                      </span>
+                      <span className="font-bold">{item.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
             <AnimatePresence mode="wait">
-              <motion.iframe
+              <motion.div
                 key={activeBranchSlug}
                 initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.98 }}
                 transition={{ duration: 0.4 }}
-                src={activeBranch.mapEmbedUrl}
-                width="100%"
-                height="100%"
-                style={{ border: 0, filter: "invert(90%) hue-rotate(180deg) contrast(110%)" }}
-                allowFullScreen={false}
-                loading="lazy"
-                referrerPolicy="no-referrer"
-                title={`${activeBranch.name} Map Coordinates Guide`}
-                className="w-full h-full relative z-10"
-              />
+                className="w-full h-full relative z-10 pt-24 md:pt-16 pb-12"
+              >
+                <iframe
+                  src={activeBranch.mapEmbedUrl}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, filter: "invert(90%) hue-rotate(180deg) contrast(110%)" }}
+                  allowFullScreen={false}
+                  loading="lazy"
+                  referrerPolicy="no-referrer"
+                  title={`${activeBranch.name} Map Coordinates Guide`}
+                  className="w-full h-full"
+                />
+
+                {/* 📍 Interactive Exact Location Pinpointed Laser Marker Overlay */}
+                <div className="absolute top-[55%] md:top-[50%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center pointer-events-none z-30 select-none">
+                  {/* Outer dual pulses */}
+                  <div className="absolute w-28 h-28 rounded-full border border-cyan-400 bg-cyan-400/5 scale-0 animate-ping" style={{ animationDuration: "3.5s" }} />
+                  <div className="absolute w-16 h-16 rounded-full border border-teal-400 bg-teal-400/10 scale-0 animate-ping" style={{ animationDuration: "2.5s", animationDelay: "1s" }} />
+
+                  {/* Pin pointed pointer pin structure */}
+                  <div className="relative flex flex-col items-center">
+                    {/* Glowing holographic radar sweeps rings */}
+                    <div className="absolute -top-1 w-2.5 h-2.5 bg-cyan-400 rounded-full blur-[3px] animate-pulse" />
+                    
+                    <MapPin className="w-11 h-11 text-cyan-400 fill-cyan-500/25 filter drop-shadow-[0_0_15px_rgba(34,211,238,0.85)] animate-bounce" style={{ animationDuration: "1.8s" }} />
+                    
+                    {/* Tiny target crosshair/ground pin */}
+                    <div className="w-3.5 h-1.5 bg-slate-950/80 rounded-full border border-cyan-400/50 shadow-[0_0_10px_rgba(0,255,255,0.7)] flex items-center justify-center -mt-1.5 animate-pulse">
+                      <div className="w-1 h-1 rounded-full bg-cyan-400" />
+                    </div>
+                  </div>
+
+                  {/* Micro glass label indicator locked inside viewport */}
+                  <div className="mt-3 bg-slate-950/95 border border-cyan-500/40 rounded-lg px-2.5 py-1 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.85)] flex items-center gap-1.5">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                    </span>
+                    <span className="text-[9px] font-mono font-black uppercase text-white tracking-wider">
+                      {activeBranch.name} Located
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
             </AnimatePresence>
             
+            {/* Telemetry coordinate readout board overlayed on maps panel */}
+            <div className="absolute bottom-14 left-4 z-20 pointer-events-none hidden sm:block">
+              <div className="bg-slate-950/90 backdrop-blur-md border border-slate-800/80 rounded-lg p-2.5 shadow-[0_4px_16px_rgba(0,0,0,0.4)] animate-pulse">
+                <div className="text-[8px] font-mono uppercase tracking-widest text-slate-500 font-bold">Node Telemetry</div>
+                <div className="text-[10px] font-mono text-cyan-400 mt-1 flex items-center gap-1.5 font-bold">
+                  <span className="inline-block w-1 h-1 rounded-full bg-cyan-400 animate-ping" />
+                  <span>LAT/LON: {
+                    activeBranchSlug === "naktala" ? "22.4885° N, 88.3684° E" :
+                    activeBranchSlug === "sonarpur" ? "22.4419° N, 88.4283° E" :
+                    "22.3115° N, 88.6631° E"
+                  }</span>
+                </div>
+              </div>
+            </div>
+
             {/* Map Ambient glowing grid */}
             <div className="absolute inset-x-0 bottom-0 py-3.5 px-6 bg-slate-950/90 backdrop-blur-md z-20 border-t border-slate-900/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
               <span className="flex items-center gap-1.5 uppercase tracking-widest text-[9px] text-cyan-400">
