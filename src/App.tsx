@@ -37,6 +37,7 @@ import TestimonialsPage from "./components/TestimonialsPage";
 import BranchesPage from "./components/BranchesPage";
 import ContactPage from "./components/ContactPage";
 import FAQSection from "./components/FAQSection";
+import Preloader from "./components/Preloader";
 
 // Data Imports
 import { COURSES, TESTIMONIALS } from "./data";
@@ -46,6 +47,19 @@ export default function App() {
   const [activeTestimonyIndex, setActiveTestimonyIndex] = useState(0);
   const [glowPosition, setGlowPosition] = useState({ x: 0, y: 0 });
   const [showCursorGlow, setShowCursorGlow] = useState(false);
+  const [isPreloading, setIsPreloading] = useState(true);
+
+  // Disable scroll while preloading to prevent offset jitter
+  useEffect(() => {
+    if (isPreloading) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isPreloading]);
 
   // Monitor cursor glow trails on desktop standard pointer
   useEffect(() => {
@@ -76,7 +90,21 @@ export default function App() {
   return (
     <div className="relative min-h-screen font-sans antialiased text-slate-200 select-none overflow-x-hidden bg-[#03040b]">
       
-      {/* 🚀 Dynamic Desktop Cursor Glow Trail */}
+      {/* 🚀 Dynamic High-End Preloader */}
+      <AnimatePresence mode="wait">
+        {isPreloading && (
+          <Preloader onComplete={() => setIsPreloading(false)} />
+        )}
+      </AnimatePresence>
+
+      {!isPreloading && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="w-full"
+        >
+          {/* 🚀 Dynamic Desktop Cursor Glow Trail */}
       {showCursorGlow && (
         <div
           className="fixed pointer-events-none w-80 h-80 rounded-full bg-cyan-500/10 blur-[80px] z-50 -translate-x-1/2 -translate-y-1/2 transition-transform duration-100 ease-out"
@@ -718,6 +746,8 @@ export default function App() {
       {/* 🎬 FOOTER segment */}
       <Footer setCurrentPage={setCurrentPage} />
 
+        </motion.div>
+      )}
     </div>
   );
 }
