@@ -53,18 +53,18 @@ export default function Navbar({ currentPage, setCurrentPage }: NavbarProps) {
                 setCurrentPage("home");
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
-              className="flex items-center gap-2 cursor-pointer group"
+              className="flex items-center gap-1.5 sm:gap-2 cursor-pointer group min-w-0"
             >
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center shadow-[0_0_15px_rgba(0,240,255,0.3)] transition-transform duration-300 group-hover:scale-105">
-                <GraduationCap className="w-5 h-5 text-slate-950 stroke-[2.5]" />
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center shadow-[0_0_15px_rgba(0,240,255,0.3)] transition-transform duration-300 group-hover:scale-105 shrink-0">
+                <GraduationCap className="w-4.5 h-4.5 sm:w-5 sm:h-5 text-slate-950 stroke-[2.5]" />
               </div>
-              <div>
-                <span className="text-xl font-black tracking-tight text-white group-hover:text-cyan-400 transition-colors duration-200 uppercase">
+              <div className="min-w-0">
+                <span className="text-lg sm:text-2xl font-black tracking-tight text-white group-hover:text-cyan-400 transition-colors duration-200 uppercase block leading-none">
                   MIND<span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">GROWTH</span>
                 </span>
-                <div className="flex items-center gap-1.5 text-[8px] font-bold text-slate-400 tracking-widest uppercase">
+                <div className="flex items-center gap-1 text-[8px] sm:text-[9px] font-bold text-slate-400 tracking-wider sm:tracking-widest uppercase mt-0.5 sm:mt-1">
                   <span>Academy</span>
-                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                  <span className="inline-block w-1 h-1 rounded-full bg-cyan-400 animate-pulse" />
                   <span>Kolkata</span>
                 </div>
               </div>
@@ -125,23 +125,23 @@ export default function Navbar({ currentPage, setCurrentPage }: NavbarProps) {
             </div>
 
             {/* Mobile Hamburger toggle */}
-            <div className="flex md:hidden items-center gap-3">
+            <div className="flex md:hidden items-center gap-1.5 sm:gap-3 shrink-0">
               <motion.button
                 whileTap={{ scale: 0.95 }}
                 onClick={() => {
                   setCurrentPage("contact");
                   setMobileMenuOpen(false);
                 }}
-                className="px-3 py-1.5 rounded-lg bg-cyan-400 text-slate-950 text-xs font-bold"
+                className="px-2.5 sm:px-3 py-1.5 rounded-lg bg-cyan-400 text-slate-950 text-[10px] sm:text-xs font-bold tracking-wider uppercase cursor-pointer"
               >
                 Enroll
               </motion.button>
               
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-white"
+                className="p-1.5 sm:p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-white cursor-pointer"
               >
-                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                {mobileMenuOpen ? <X className="w-4 h-4 sm:w-5 sm:h-5" /> : <Menu className="w-4 h-4 sm:w-5 sm:h-5" />}
               </button>
             </div>
 

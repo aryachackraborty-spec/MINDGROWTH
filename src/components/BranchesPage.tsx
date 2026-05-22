@@ -62,20 +62,20 @@ export default function BranchesPage() {
         </div>
 
         {/* Branch Navigation pills */}
-        <div className="flex justify-center gap-2 md:gap-4 mb-12">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 mb-12 max-w-full px-2">
           {BRANCHES.map((branch) => {
             const isActive = activeBranchSlug === branch.slug;
             return (
               <button
                 key={branch.slug}
                 onClick={() => setActiveBranchSlug(branch.slug)}
-                className={`relative px-5 md:px-7 py-3 rounded-2xl text-xs md:text-sm font-bold uppercase tracking-wider transition-all duration-300 border cursor-pointer flex items-center gap-2 ${
+                className={`relative px-3.5 sm:px-5 md:px-7 py-2.5 md:py-3 rounded-xl sm:rounded-2xl text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-wider transition-all duration-300 border cursor-pointer flex items-center gap-1.5 sm:gap-2 ${
                   isActive
                     ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 border-cyan-400 shadow-[0_0_20px_rgba(0,240,255,0.25)] font-extrabold"
                     : "bg-slate-900/60 text-slate-300 border-slate-800 hover:text-white"
                 }`}
               >
-                <Building className="w-4 h-4" />
+                <Building className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 <span>{branch.name}</span>
               </button>
             );
