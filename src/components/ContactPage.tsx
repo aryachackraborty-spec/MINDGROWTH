@@ -50,7 +50,7 @@ Please contact us with class timings. Thank you!`;
     const encodedText = encodeURIComponent(waText);
     
     // Create WhatsApp Redirect Link (Default central customer service line)
-    const baseNumber = "919830224455"; // Naktala/Sonarpur central support helpline
+    const baseNumber = "918051680816"; // Naktala/Sonarpur central support helpline
     const whatsappUrl = `https://wa.me/${baseNumber}?text=${encodedText}`;
 
     // Redirect to WhatsApp after brief modal presentation
@@ -112,7 +112,7 @@ Please contact us with class timings. Thank you!`;
                   <div>
                     <h4 className="text-xs font-bold text-white uppercase tracking-wider">Helpline Calling Direct</h4>
                     <p className="text-sm font-black text-slate-200 mt-1 hover:text-cyan-400 transition-colors">
-                      <a href="tel:+919830224455">+91 98302 24455</a>
+                      <a href="tel:+918051680816">+91 80516 80816</a>
                     </p>
                     <p className="text-[10px] text-slate-500 font-mono mt-0.5">Naktala Central Campus Desk</p>
                   </div>
@@ -156,7 +156,7 @@ Please contact us with class timings. Thank you!`;
                 Skip form registrations entirely. Connect live with our central counselors via custom support.
               </p>
               <a
-                href="https://wa.me/919830224455?text=Hi%20MindGrowth%20Academy!%20I%20want%20to%20know%20more%20about%20your%20coaching%2520programs%2520in%2520Kolkata."
+                href="https://wa.me/918051680816?text=Hi%20MindGrowth%20Academy!%20I%20want%20to%20know%20more%20about%20your%20coaching%2520programs%2520in%2520Kolkata."
                 target="_blank"
                 rel="noreferrer"
                 className="w-full py-2.5 bg-emerald-500 text-slate-950 text-xs font-black tracking-wider rounded-xl uppercase hover:bg-emerald-400 duration-200 block"

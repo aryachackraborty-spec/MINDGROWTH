@@ -126,8 +126,8 @@ export const BRANCHES: Branch[] = [
     address: "Shyama Apartment, 3rd Floor, 2/91B, Naktala, Kolkata – 700047",
     landmark: "Opp. Bazaar Kolkata",
     email: "academymindgrowth@gmail.com",
-    phone: "+91 98302 24455",
-    whatsapp: "919830224455",
+    phone: "+91 80516 80816",
+    whatsapp: "918051680816",
     mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3686.417387123985!2d88.36838387530364!3d22.488506179551403!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0270bdf606be95%3A0xe67ef86a4e212f36!2sNaktala%2C%20Kolkata%2C%20West%20Bengal%20700047!5e0!3m2!1sen!2sin!4v1715693000000!5m2!1sen!2sin",
     features: ["Opposite Bazaar Kolkata", "Near Naktala Metro Station", "Smart Digital Classroom Enabled", "Premium Self-Study Zones"]
   },
@@ -137,8 +137,8 @@ export const BRANCHES: Branch[] = [
     address: "82, Neel Pushpa Complex, 2nd Floor, Sonarpur Bazar, Kolkata – 700150",
     landmark: "Sonarpur Bazar",
     email: "academymindgrowth@gmail.com",
-    phone: "+91 98311 55667",
-    whatsapp: "919831155667",
+    phone: "+91 80099 00981",
+    whatsapp: "918009900981",
     mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1844.032230623!2d88.4283121!3d22.4419208!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02720d2ecbdf9d%3A0x1d61858c8dbcc6d8!2sSonarpur%20Bazar%2C%20Kolkata%20700150!5e0!3m2!1sen!2sin!4v1715694000000!5m2!1sen!2sin",
     features: ["Heart of Sonarpur Bazar", "2 Mins from Sonarpur Junction Station", "Equipped Computer-Based Test (CBT) Lab", "Fully AC Diagnostic Environment"]
   },
@@ -148,8 +148,8 @@ export const BRANCHES: Branch[] = [
     address: "Asha Complex, Sanjay Pally, Canning, South 24 Parganas",
     landmark: "Opp. Bandhumahul Club",
     email: "mindgrowthacademy00@gmail.com",
-    phone: "+91 97334 33221",
-    whatsapp: "919733433221",
+    phone: "+91 90739 79837",
+    whatsapp: "919073979837",
     mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3690.627387123985!2d88.6631838!3d22.3115061!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0212a4f605fa8d%3A0x6b4ef86b4e212e36!2sCanning%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1715695000000!5m2!1sen!2sin",
     features: ["Opposite Bandhumahul Club", "Spacious Hybrid Learning Infrastructure", "Comprehensive Regional Language Support", "Library with Vast Offline Textbooks Library"]
   }

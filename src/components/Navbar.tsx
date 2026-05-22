@@ -186,11 +186,11 @@ export default function Navbar({ currentPage, setCurrentPage }: NavbarProps) {
               <div className="px-4 py-2">
                 <span className="text-[10px] font-mono uppercase tracking-widest text-slate-500 block mb-2">Central Support</span>
                 <a 
-                  href="tel:+919830224455" 
+                  href="tel:+918051680816" 
                   className="text-sm font-bold text-cyan-400 flex items-center gap-2 mb-1"
                 >
                   <Phone className="w-4 h-4" />
-                  +91 98302 24455
+                  +91 80516 80816
                 </a>
                 <span className="text-xs text-slate-400 block font-mono">academymindgrowth@gmail.com</span>
               </div>

@@ -691,7 +691,7 @@ export default function App() {
                     </button>
 
                     <a
-                      href="https://wa.me/919830224455?text=Hi%28MindGrowth%28Academy!%28I%28want%28to%28know%28about%28admission%28details."
+                      href="https://wa.me/918051680816?text=Hi%28MindGrowth%28Academy!%28I%28want%28to%28know%28about%28admission%28details."
                       target="_blank"
                       rel="noreferrer"
                       className="px-8 py-4 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 font-black text-xs uppercase tracking-wider transition-colors inline-flex items-center gap-2"
@@ -768,7 +768,7 @@ export default function App() {
       {/* 📞 FLOATING WHATSAPP CHAT ON THE RIGHT-HAND SIDE */}
       <div className="fixed bottom-6 right-6 z-40">
         <a
-          href="https://wa.me/919830224455?text=Hi%20MindGrowth%20Academy%20Kolkata!%20I%20am%20looking%20for%20CBSE/ICSE/JEE/NEET%20admission%20details.%20Please%20guide%20us."
+          href="https://wa.me/918051680816?text=Hi%20MindGrowth%20Academy%20Kolkata!%20I%20am%20looking%20for%20CBSE/ICSE/JEE/NEET%20admission%20details.%20Please%20guide%20us."
           target="_blank"
           rel="noreferrer"
           className="relative w-14 h-14 rounded-2xl bg-emerald-500 hover:bg-emerald-400 flex items-center justify-center text-slate-950 shadow-[0_8px_30px_rgba(16,185,129,0.4)] hover:scale-110 transition-transform duration-300 group cursor-pointer"
