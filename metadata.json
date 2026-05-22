@@ -1,0 +1,6 @@
+{
+  "name": "MindGrowth Academy",
+  "description": "Futuristic interactive science and competitive coaching academy for CBSE, ICSE, State Boards, IIT-JEE & NEET.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
