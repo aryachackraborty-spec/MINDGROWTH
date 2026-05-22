@@ -200,9 +200,18 @@ export default function Interactive3DModel({ courseId, glowColorClass = "from-cy
     }
 
     let phase = 0;
+    let currentHoverScale = 1.0;
+    let currentSpeedMultiplier = 1.0;
 
     const render = () => {
       if (!ctx || !canvas) return;
+
+      // Smooth lerp for hover transitions
+      const targetHoverScale = isHovered ? 1.25 : 1.0;
+      const targetSpeedMultiplier = isHovered ? 4.0 : 1.0;
+
+      currentHoverScale += (targetHoverScale - currentHoverScale) * 0.12;
+      currentSpeedMultiplier += (targetSpeedMultiplier - currentSpeedMultiplier) * 0.12;
 
       // Handle high precision scaling
       const width = canvas.clientWidth;
@@ -219,8 +228,8 @@ export default function Interactive3DModel({ courseId, glowColorClass = "from-cy
 
       // Increment rotation incrementally if not dragging
       if (!isDraggingRef.current) {
-        anglesRef.current.y += autoRotationSpeedY;
-        anglesRef.current.x += autoRotationSpeedX;
+        anglesRef.current.y += autoRotationSpeedY * currentSpeedMultiplier;
+        anglesRef.current.x += autoRotationSpeedX * currentSpeedMultiplier;
       }
 
       const cosX = Math.cos(anglesRef.current.x);
@@ -255,7 +264,7 @@ export default function Interactive3DModel({ courseId, glowColorClass = "from-cy
             const zFinal = zRoty * cosX;
 
             const dProj = 180;
-            const scaleProj = dProj / (dProj + zFinal) * zoomRef.current;
+            const scaleProj = dProj / (dProj + zFinal) * zoomRef.current * currentHoverScale;
             const sx = cx + xRoty * scaleProj;
             const sy = cy + yRotx * scaleProj;
 
@@ -298,7 +307,7 @@ export default function Interactive3DModel({ courseId, glowColorClass = "from-cy
             const zFinal = oy * sinX + zRoty * cosX;
 
             const dProj = 180;
-            const scaleProj = dProj / (dProj + zFinal) * zoomRef.current;
+            const scaleProj = dProj / (dProj + zFinal) * zoomRef.current * currentHoverScale;
             const sx = cx + xRoty * scaleProj;
             const sy = cy + yRotx * scaleProj;
 
@@ -332,7 +341,7 @@ export default function Interactive3DModel({ courseId, glowColorClass = "from-cy
 
         // Perspective Projection calculation
         const distance = 160;
-        const scale = distance / (distance + z2) * zoomRef.current;
+        const scale = distance / (distance + z2) * zoomRef.current * currentHoverScale;
 
         const sx = cx + x1 * scale;
         const sy = cy + y2 * scale;
@@ -473,7 +482,7 @@ export default function Interactive3DModel({ courseId, glowColorClass = "from-cy
   return (
     <div 
       ref={containerRef}
-      className="relative w-full h-[190px] rounded-xl bg-slate-950/60 border border-slate-900 border-dashed overflow-hidden flex flex-col justify-center items-center group/model mt-3 select-none"
+      className="relative w-full h-[190px] rounded-xl bg-slate-950/60 border border-slate-900 border-dashed overflow-hidden flex flex-col justify-center items-center group/model mt-3 select-none transition-all duration-300 hover:scale-[1.03] hover:border-cyan-500/40 hover:shadow-[0_0_20px_rgba(6,182,212,0.1)]"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => {
         setIsHovered(false);

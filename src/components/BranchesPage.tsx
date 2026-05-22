@@ -24,6 +24,51 @@ export default function BranchesPage() {
 
   const activeBranch = BRANCHES.find((b) => b.slug === activeBranchSlug) || BRANCHES[0];
 
+  const getBranchActiveStyles = (slug: string) => {
+    switch (slug) {
+      case "sonarpur":
+        return "bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-600 text-slate-950 border-purple-400 shadow-[0_0_20px_rgba(168,85,247,0.3)] font-black scale-105";
+      case "canning":
+        return "bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 text-slate-950 border-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.3)] font-black scale-105";
+      case "naktala":
+      default:
+        return "bg-gradient-to-r from-cyan-500 via-teal-400 to-blue-600 text-slate-950 border-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.3)] font-black scale-105";
+    }
+  };
+
+  const getBranchInactiveStyles = (slug: string) => {
+    switch (slug) {
+      case "sonarpur":
+        return "bg-slate-900/60 text-slate-300 border-slate-800 hover:border-purple-550/60 hover:text-purple-400 hover:shadow-[0_0_15px_rgba(168,85,247,0.15)] hover:scale-105";
+      case "canning":
+        return "bg-slate-900/60 text-slate-300 border-slate-800 hover:border-emerald-550/60 hover:text-emerald-400 hover:shadow-[0_0_15px_rgba(16,185,129,0.15)] hover:scale-105";
+      case "naktala":
+      default:
+        return "bg-slate-900/60 text-slate-300 border-slate-800 hover:border-cyan-550/60 hover:text-cyan-400 hover:shadow-[0_0_15px_rgba(6,182,212,0.15)] hover:scale-105";
+    }
+  };
+
+  const getBranchDetailStyles = (slug: string) => {
+    switch (slug) {
+      case "sonarpur":
+        return "hover:border-purple-500/40 hover:shadow-[0_0_35px_rgba(168,85,247,0.15)]";
+      case "canning":
+        return "hover:border-emerald-500/40 hover:shadow-[0_0_35px_rgba(16,185,129,0.15)]";
+      case "naktala":
+      default:
+        return "hover:border-cyan-500/40 hover:shadow-[0_0_35px_rgba(6,182,212,0.15)]";
+    }
+  };
+
+  const getBranchGlowColor = (slug: string) => {
+    switch (slug) {
+      case "sonarpur": return "bg-purple-500/10";
+      case "canning": return "bg-emerald-500/10";
+      case "naktala":
+      default: return "bg-cyan-500/10";
+    }
+  };
+
   return (
     <div className="pt-24 min-h-screen bg-slate-950/25 text-slate-100 relative">
       <div className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full bg-cyan-500/5 blur-3xl pointer-events-none" />
@@ -71,8 +116,8 @@ export default function BranchesPage() {
                 onClick={() => setActiveBranchSlug(branch.slug)}
                 className={`relative px-3.5 sm:px-5 md:px-7 py-2.5 md:py-3 rounded-xl sm:rounded-2xl text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-wider transition-all duration-300 border cursor-pointer flex items-center gap-1.5 sm:gap-2 ${
                   isActive
-                    ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 border-cyan-400 shadow-[0_0_20px_rgba(0,240,255,0.25)] font-extrabold"
-                    : "bg-slate-900/60 text-slate-300 border-slate-800 hover:text-white"
+                    ? getBranchActiveStyles(branch.slug)
+                    : getBranchInactiveStyles(branch.slug)
                 }`}
               >
                 <Building className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
@@ -88,10 +133,10 @@ export default function BranchesPage() {
           {/* Card Detailed specs */}
           <motion.div 
             layoutId="branchDetailsFrame"
-            className="lg:col-span-5 rounded-2xl glass-card p-6 md:p-8 flex flex-col justify-between relative overflow-hidden"
+            className={`lg:col-span-5 rounded-2xl glass-card p-6 md:p-8 flex flex-col justify-between relative overflow-hidden transition-all duration-500 border border-slate-800/85 hover:scale-[1.015] ${getBranchDetailStyles(activeBranch.slug)}`}
           >
             {/* Dynamic decorative backdrop circles */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/5 rounded-full blur-2xl pointer-events-none" />
+            <div className={`absolute top-0 right-0 w-32 h-32 ${getBranchGlowColor(activeBranch.slug)} rounded-full blur-2xl pointer-events-none transition-all duration-500`} />
 
             <div>
               <div className="flex items-center gap-2 text-cyan-400 font-mono tracking-widest text-xs uppercase mb-4">

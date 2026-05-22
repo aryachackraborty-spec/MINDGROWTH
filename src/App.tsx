@@ -5,6 +5,10 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 import { 
   ArrowRight, 
   Sparkles, 
@@ -60,6 +64,60 @@ export default function App() {
       document.body.style.overflow = "";
     };
   }, [isPreloading]);
+
+  // Subtle GSAP scroll-triggered entrance animation with a staggered float effect for Core Objective card
+  useEffect(() => {
+    if (currentPage !== "home" || isPreloading) return;
+
+    // Fast layout settlement wait
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 100);
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".vanguard-objective-card",
+          start: "top 90%",
+          toggleActions: "play none none none"
+        }
+      });
+
+      tl.fromTo(".vanguard-objective-card", 
+        { opacity: 0, scale: 0.94, y: 50 },
+        { 
+          opacity: 1, 
+          scale: 1, 
+          y: 0, 
+          duration: 0.8, 
+          ease: "power3.out",
+          onComplete: () => {
+            const el = document.querySelector(".vanguard-objective-card");
+            if (el) {
+              el.classList.add("animate-float");
+              gsap.set(".vanguard-objective-card", { clearProps: "transform" });
+            }
+          }
+        }
+      )
+      .fromTo(".vanguard-objective-item",
+        { opacity: 0, y: 15 },
+        { 
+          opacity: 1, 
+          y: 0, 
+          duration: 0.5, 
+          stagger: 0.12, 
+          ease: "power2.out" 
+        },
+        "-=0.45"
+      );
+    });
+
+    return () => {
+      clearTimeout(timer);
+      ctx.revert();
+    };
+  }, [currentPage, isPreloading]);
 
   // Monitor cursor glow trails on desktop standard pointer
   useEffect(() => {
@@ -365,23 +423,8 @@ export default function App() {
                     <div className="absolute w-80 h-80 border-dashed border-purple-500/10 rounded-full animate-spin pointer-events-none" style={{ animationDuration: "40s", animationDirection: "reverse" }} />
 
                     {/* Highly Polished Glassmorphic Card Panel */}
-                    <motion.div 
-                      className="w-full max-w-md relative z-10 p-8 rounded-3xl bg-slate-950/75 border border-cyan-500/20 backdrop-blur-xl shadow-[0_0_50px_rgba(34,211,238,0.15)] overflow-hidden group/objective"
-                      initial={{ opacity: 0, scale: 0.95, y: 15 }}
-                      animate={{ 
-                        opacity: 1, 
-                        scale: 1, 
-                        y: [0, -8, 0],
-                      }}
-                      transition={{
-                        opacity: { duration: 0.6 },
-                        scale: { duration: 0.6 },
-                        y: {
-                          repeat: Infinity,
-                          duration: 5,
-                          ease: "easeInOut"
-                        }
-                      }}
+                    <div 
+                      className="vanguard-objective-card w-full max-w-md relative z-10 p-8 rounded-3xl bg-slate-950/75 border border-cyan-500/20 backdrop-blur-xl shadow-[0_0_50px_rgba(34,211,238,0.15)] overflow-hidden group/objective opacity-0 scale-95 translate-y-12"
                     >
                       {/* Interactive glow effect inside card */}
                       <div className="absolute top-0 left-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none" />
@@ -391,7 +434,7 @@ export default function App() {
                       <div className="absolute top-0 inset-x-0 h-[1.5px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-80" />
                       
                       {/* Visual header indicators */}
-                      <div className="mb-6 flex justify-between items-center">
+                      <div className="vanguard-objective-item mb-6 flex justify-between items-center opacity-0 translate-y-4">
                         <div className="flex items-center gap-2">
                           <span className="w-2.5 h-2.5 rounded-full bg-cyan-500 animate-ping" />
                           <span className="text-[10px] font-mono uppercase tracking-widest text-cyan-400 font-black">
@@ -405,13 +448,13 @@ export default function App() {
                       </div>
 
                       {/* Quote Mark */}
-                      <div className="text-4xl font-serif text-cyan-500/30 leading-none h-4">&ldquo;</div>
+                      <div className="vanguard-objective-item text-4xl font-serif text-cyan-500/30 leading-none h-4 opacity-0 translate-y-4">&ldquo;</div>
 
-                      <blockquote className="text-sm sm:text-base text-slate-100 font-sans tracking-tight font-medium leading-relaxed mb-6 pt-1 text-left">
+                      <blockquote className="vanguard-objective-item text-sm sm:text-base text-slate-100 font-sans tracking-tight font-medium leading-relaxed mb-6 pt-1 text-left opacity-0 translate-y-4">
                         We make sure every Indian competitive exam aspirant understands why a physics vector rotates, rather than simply memorizing formula variables.
                       </blockquote>
                       
-                      <div className="flex justify-between items-center pt-5 border-t border-slate-900/80">
+                      <div className="vanguard-objective-item flex justify-between items-center pt-5 border-t border-slate-900/80 opacity-0 translate-y-4">
                         <div>
                           <div className="text-xs font-bold uppercase text-white tracking-wide">MINDGROWTH™ METHOD</div>
                           <div className="text-[9px] font-mono text-slate-500 uppercase tracking-widest">Interactive Pedagogy</div>
@@ -424,7 +467,7 @@ export default function App() {
                         </div>
                       </div>
 
-                    </motion.div>
+                    </div>
                   </div>
 
                 </div>
