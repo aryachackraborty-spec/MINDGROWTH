@@ -109,12 +109,29 @@ Please contact us with class timings. Thank you!`;
                   <div className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center shrink-0">
                     <Phone className="w-5 h-5 text-cyan-400" />
                   </div>
-                  <div>
+                  <div className="flex-1 space-y-3">
                     <h4 className="text-xs font-bold text-white uppercase tracking-wider">Helpline Calling Direct</h4>
-                    <p className="text-sm font-black text-slate-200 mt-1 hover:text-cyan-400 transition-colors">
-                      <a href="tel:+918051680816">+91 80516 80816</a>
-                    </p>
-                    <p className="text-[10px] text-slate-500 font-mono mt-0.5">Naktala Central Campus Desk</p>
+                    
+                    <div className="pb-2 border-b border-slate-900/40">
+                      <p className="text-sm font-black text-slate-200 mt-0.5 hover:text-cyan-400 transition-colors">
+                        <a href="tel:+918009900981">+91 80099 00981</a>
+                      </p>
+                      <p className="text-[10px] text-slate-500 font-mono mt-0.5 uppercase tracking-wider">Sonarpur Branch (Head Office)</p>
+                    </div>
+
+                    <div className="pb-2 border-b border-slate-900/40">
+                      <p className="text-sm font-black text-slate-200 mt-0.5 hover:text-cyan-400 transition-colors">
+                        <a href="tel:+918051680816">+91 80516 80816</a>
+                      </p>
+                      <p className="text-[10px] text-slate-500 font-mono mt-0.5 uppercase tracking-wider">Naktala Branch Campus</p>
+                    </div>
+
+                    <div>
+                      <p className="text-sm font-black text-slate-200 mt-0.5 hover:text-cyan-400 transition-colors">
+                        <a href="tel:+919073979837">+91 90739 79837</a>
+                      </p>
+                      <p className="text-[10px] text-slate-500 font-mono mt-0.5 uppercase tracking-wider">Canning Branch Campus</p>
+                    </div>
                   </div>
                 </div>
 
