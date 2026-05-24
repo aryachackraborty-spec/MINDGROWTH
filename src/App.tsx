@@ -691,7 +691,7 @@ export default function App() {
                     </button>
 
                     <a
-                      href="https://wa.me/918051680816?text=Hi%28MindGrowth%28Academy!%28I%28want%28to%28know%28about%28admission%28details."
+                      href="https://wa.me/918009900981?text=Hi%28MindGrowth%28Academy!%28I%28want%28to%28know%28about%28admission%28details."
                       target="_blank"
                       rel="noreferrer"
                       className="px-8 py-4 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 font-black text-xs uppercase tracking-wider transition-colors inline-flex items-center gap-2"
